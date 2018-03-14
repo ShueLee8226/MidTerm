@@ -65,7 +65,7 @@ ls -l | head
 echo "Here is a example of a device that ignores the input and throw"; echo "away the data"
 echo hello world > /dev/null
 echo "let see  the kernel messages and the block device file system"
-dmesg | grep sd
+sudo dmesg | grep sd
 sleep 2
 lsblk --fs
 echo "now let create a empty file"
@@ -76,9 +76,9 @@ sleep 3
 
 clear
 echo "This is Week4 Script"
-echo "First let check what in the partition table"
-fdisk -l
-echo "Now let create a partition that is 16MB.img"
+echo "let check what in the partition table"
+sudo fdisk -l
+echo "Now let create a file image that is 16MB.img"
 sudo dd if=/dev/zero of=./16MB.img bs=1M count=16
 sudo hexdump ./16MB.img | less
 echo "Now let make a filesystem that is ext4"
@@ -86,20 +86,20 @@ sudo mkfs -t ext4 ./16MB.img
 echo "let check other filesystem"
 ls -l /sbin/mkfs.*
 sleep 3
-echo "now let mount the partition that we created"
+echo "now let mount the file image that we created"
 mkdir /mnt/tmp
 sudo mount ./16MB.img /mnt/tmp
 sudo mount; df -h
 lsblk
 sleep 1
-echo "Ok, now let put something in the partition"
+echo "Ok, now let put something in the file image"
 cd /mnt/tmp
 ls
 sleep 3
 echo "Week4 script" > ./world.txt
 #unmount the partition
 sudo umount /mnt/tmp
-echo "Let check for world.txt in the partition that we create" 
+echo "Let check for world.txt in the file image that we created"
 sudo hexdump --canonical ./16MB.img | less
 
 clear
@@ -155,7 +155,7 @@ who -r
 sleep 2
 echo "Let find our init system"
 ls /usr/lib/systemd /etc/systemd/ | head
-ls ls /etc/init | head
+ls /etc/init | head
 sleep 3
 
 echo "Let check some list unit"
