@@ -106,8 +106,8 @@ clear
 echo "This is Week5 and 6 script"
 echo "Let look at the kernel log"
 sleep 2
-less /var/log/kern.log | head
-less /var/log/messages | tail
+sudo less /var/log/kern.log | head
+sudo less /var/log/messages | tail
 sleep 3
 
 clear
